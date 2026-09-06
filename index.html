@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>D'House Burger | Cardápio Digital</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: #f5efe5;
+      color: #292929;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       CABEÇALHO
+    ========================= */
+
+    header {
+      background:
+        linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+        linear-gradient(135deg, #2d0904, #8d1f0c);
+
+      color: white;
+      text-align: center;
+      padding: 35px 15px 30px;
+    }
+
+    header .fire {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 38px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin-top: 8px;
+      color: #ffd27a;
+      font-size: 17px;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container {
+      width: 92%;
+      max-width: 1100px;
+      margin: 25px auto 140px;
+    }
+
+    /* =========================
+       CATEGORIAS
+    ========================= */
+
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 30px 0 16px;
+      color: #7b190b;
+      font-size: 25px;
+      border-bottom: 2px solid #d8b58b;
+      padding-bottom: 10px;
+    }
+
+    /* =========================
+       CARDÁPIO
+    ========================= */
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .item {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(0,0,0,.10);
+      transition: .2s;
+      border: 1px solid #eadaca;
+    }
+
+    .item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.16);
+    }
+
+    .item-image {
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 65px;
+      background: linear-gradient(135deg, #fff1d5, #f2d09b);
+    }
+
+    .item-content {
+      padding: 17px;
+    }
+
+    .item h3 {
+      color: #3a160e;
+      font-size: 19px;
+      margin-bottom: 7px;
+    }
+
+    .item p {
+      color: #777;
+      font-size: 14px;
+      min-height: 55px;
+      line-height: 1.4;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .price {
+      color: #a3220e;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .add {
+      border: none;
+      background: #a3220e;
+      color: white;
+      padding: 9px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .add:hover {
+      background: #741507;
+    }
+
+    /* =========================
+       CARRINHO
+    ========================= */
+
+    .cart {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92%;
+      max-width: 500px;
+      background: #21100c;
+      color: white;
+      border-radius: 18px;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.3);
+      z-index: 10;
+    }
+
+    .cart-info {
+      font-size: 14px;
+      min-width: 0;
+    }
+
+    .cart-info strong {
+      display: block;
+      font-size: 18px;
+      color: #ffd27a;
+      margin-bottom: 3px;
+    }
+
+    .order {
+      border: none;
+      background: #25d366;
+      color: white;
+      padding: 12px 17px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .order:hover {
+      background: #1da851;
+    }
+
+    /* =========================
+       RODAPÉ
+    ========================= */
+
+    footer {
+      background: #21100c;
+      color: #ddd;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer strong {
+      color: #ffd27a;
+      font-size: 19px;
+    }
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .menu {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+    }
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 28px 12px 25px;
+      }
+
+      header .fire {
+        font-size: 36px;
+      }
+
+      header h1 {
+        font-size: 26px;
+        line-height: 1.15;
+      }
+
+      header p {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .container {
+        width: 94%;
+        margin-top: 20px;
+        margin-bottom: 145px;
+      }
+
+      .category-title {
+        font-size: 21px;
+        margin-top: 25px;
+        margin-bottom: 14px;
+        padding-bottom: 8px;
+      }
+
+      .menu {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .item {
+        border-radius: 12px;
+      }
+
+      .item-image {
+        height: 105px;
+        font-size: 48px;
+      }
+
+      .item-content {
+        padding: 11px;
+      }
+
+      .item h3 {
+        font-size: 15px;
+        line-height: 1.25;
+        margin-bottom: 6px;
+      }
+
+      .item p {
+        font-size: 12px;
+        line-height: 1.35;
+        min-height: 60px;
+      }
+
+      .bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .price {
+        font-size: 18px;
+      }
+
+      .add {
+        width: 100%;
+        padding: 10px 5px;
+        font-size: 12px;
+      }
+
+      .cart {
+        width: calc(100% - 20px);
+        bottom: 10px;
+        padding: 11px;
+        border-radius: 14px;
+        gap: 8px;
+      }
+
+      .cart-info {
+        font-size: 12px;
+      }
+
+      .cart-info strong {
+        font-size: 17px;
+      }
+
+      .order {
+        padding: 11px 10px;
+        font-size: 11px;
+      }
+
+      footer {
+        padding: 25px 15px;
+        font-size: 13px;
+      }
+    }
+
+    /* =========================
+       CELULAR PEQUENO
+    ========================= */
+
+    @media (max-width: 380px) {
+
+      .menu {
+        gap: 8px;
+      }
+
+      .item-image {
+        height: 90px;
+        font-size: 42px;
+      }
+
+      .item-content {
+        padding: 9px;
+      }
+
+      .item h3 {
+        font-size: 14px;
+      }
+
+      .item p {
+        font-size: 11px;
+      }
+
+      .price {
+        font-size: 16px;
+      }
+
+      .add {
+        font-size: 11px;
+      }
+
+      .cart {
+        width: calc(100% - 12px);
+      }
+
+      .order {
+        font-size: 10px;
+        padding: 10px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CABEÇALHO -->
+
+  <header>
+    <div class="fire">🍔</div>
+    <h1>D'House Burger</h1>
+    <p>Hambúrgueres Artesanais • Lanches • Bebidas</p>
+  </header>
+
+
+  <main class="container">
+
+    <!-- =========================
+         HAMBÚRGUERES ARTESANAIS
+    ========================= -->
+
+    <h2 class="category-title">
+      🍔 Hambúrgueres Artesanais
+    </h2>
+
+    <section class="menu">
+
+      <article class="item">
+
+        <div class="item-image">
+          🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>D'House Burguer</h3>
+
+          <p>
+            Pão amanteigado, molho especial da casa,
+            hambúrguer artesanal de 120g, Blend especial
+            do Chef e queijo cheddar.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 19,90
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('D House Burguer', 19.90)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🥬🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>D'House Burguer Salada</h3>
+
+          <p>
+            Pão amanteigado, molho da casa,
+            hambúrguer artesanal de 120g,
+            Blend especial do Chef e queijo cheddar.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 26,90
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('D House Burguer Salada', 26.90)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🥓🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>D'House Burguer Bacon</h3>
+
+          <p>
+            Pão amanteigado, molho da casa,
+            hambúrguer artesanal de 120g,
+            Blend especial do Chef, tiras de bacon
+            e queijo cheddar.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 26,90
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('D House Burguer Bacon', 26.90)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🥓🥬🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>D'House Burguer Salada Bacon</h3>
+
+          <p>
+            Pão amanteigado, molho da casa,
+            hambúrguer artesanal de 120g,
+            Blend especial do Chef, tiras de bacon,
+            alface, tomate, cebola roxa, picles
+            e queijo cheddar.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 29,90
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('D House Burguer Salada Bacon', 29.90)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🧅🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>D'House Burguer Onion</h3>
+
+          <p>
+            Pão amanteigado, molho da casa,
+            hambúrguer artesanal de 120g,
+            Blend especial do Chef, queijo cheddar
+            e anéis de cebola.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 37,90
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('D House Burguer Onion', 37.90)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          👑🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>D'House Burguer O Rei da Casa</h3>
+
+          <p>
+            Pão amanteigado, molho da casa,
+            hambúrguer artesanal de 120g,
+            Blend especial do Chef, tiras de bacon,
+            onion rings, alface, tomate, cebola roxa,
+            picles e queijo cheddar.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 39,90
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('D House Burguer O Rei da Casa', 39.90)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         LANCHES TRADICIONAIS
+    ========================= -->
+
+    <h2 class="category-title">
+      🍔 Lanches Tradicionais (X)
+    </h2>
+
+    <section class="menu">
+
+      <article class="item">
+
+        <div class="item-image">
+          🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>X-Burguer</h3>
+
+          <p>
+            Pão de brioche, hambúrguer de 90g,
+            queijo, presunto e maionese.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 12,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('X-Burguer', 12)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🥬🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>X-Salada</h3>
+
+          <p>
+            Pão de brioche, hambúrguer de 90g,
+            alface, tomate, queijo, presunto
+            e maionese.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 13,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('X-Salada', 13)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🥓🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>X-Bacon</h3>
+
+          <p>
+            Pão de brioche, hambúrguer de 90g,
+            tiras de bacon, alface, tomate,
+            queijo, presunto e maionese.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 18,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('X-Bacon', 18)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🌶️🍔
+        </div>
+
+        <div class="item-content">
+
+          <h3>X-Calabresa</h3>
+
+          <p>
+            Pão de brioche, hambúrguer de 90g,
+            calabresa frita, alface, tomate,
+            queijo, presunto e maionese.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 18,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('X-Calabresa', 18)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         BEBIDAS
+    ========================= -->
+
+    <h2 class="category-title">
+      🥤 Bebidas
+    </h2>
+
+    <section class="menu">
+
+      <article class="item">
+
+        <div class="item-image">
+          🥤
+        </div>
+
+        <div class="item-content">
+
+          <h3>Refrigerante Lata</h3>
+
+          <p>
+            Coca-Cola, Fanta Laranja, Fanta Uva
+            ou Guaraná Antarctica.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 7,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('Refrigerante Lata', 7)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🍺
+        </div>
+
+        <div class="item-content">
+
+          <h3>Cerveja Long Neck</h3>
+
+          <p>
+            Budweiser ou Sol.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 9,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('Cerveja Long Neck', 9)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="item">
+
+        <div class="item-image">
+          🍻
+        </div>
+
+        <div class="item-content">
+
+          <h3>Chopp 500ml</h3>
+
+          <p>
+            Chopp 500ml bem gelado.
+          </p>
+
+          <div class="bottom">
+
+            <span class="price">
+              R$ 10,00
+            </span>
+
+            <button
+              class="add"
+              onclick="addItem('Chopp 500ml', 10)"
+            >
+              + Adicionar
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       CARRINHO
+  ========================= -->
+
+  <div class="cart">
+
+    <div class="cart-info">
+
+      <strong id="total">
+        R$ 0,00
+      </strong>
+
+      <span id="items">
+        Nenhum item selecionado
+      </span>
+
+    </div>
+
+    <button
+      class="order"
+      onclick="sendOrder()"
+    >
+      📲 Pedir pelo WhatsApp
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       RODAPÉ
+  ========================= -->
+
+  <footer>
+
+    <strong>
+      🍔 D'House Burger
+    </strong>
+
+    <p>
+      Hambúrgueres artesanais e lanches deliciosos!
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    let cart = [];
+
+    let total = 0;
+
+
+    function addItem(name, price) {
+
+      cart.push({
+        name: name,
+        price: price
+      });
+
+      total += price;
+
+      updateCart();
+
+    }
+
+
+    function updateCart() {
+
+      document.getElementById("total").innerText =
+        "R$ " +
+        total
+          .toFixed(2)
+          .replace(".", ",");
+
+
+      if (cart.length === 0) {
+
+        document.getElementById("items").innerText =
+          "Nenhum item selecionado";
+
+      }
+
+      else if (cart.length === 1) {
+
+        document.getElementById("items").innerText =
+          "1 item selecionado";
+
+      }
+
+      else {
+
+        document.getElementById("items").innerText =
+          cart.length +
+          " itens selecionados";
+
+      }
+
+    }
+
+
+    function sendOrder() {
+
+      if (cart.length === 0) {
+
+        alert(
+          "Adicione pelo menos um item ao pedido."
+        );
+
+        return;
+
+      }
+
+
+      let message =
+        "🔥 *PEDIDO - D'HOUSE BURGER*%0A%0A";
+
+
+      cart.forEach(function(item, index) {
+
+        message +=
+          (index + 1) +
+          ". " +
+          item.name +
+          " - R$ " +
+          item.price
+            .toFixed(2)
+            .replace(".", ",") +
+          "%0A";
+
+      });
+
+
+      message +=
+        "%0A*Total: R$ " +
+        total
+          .toFixed(2)
+          .replace(".", ",") +
+        "*";
+
+
+      /*
+        WHATSAPP DO ESTABELECIMENTO
+      */
+
+      const phone =
+        "5541998828801";
+
+
+      window.open(
+        "https://wa.me/" +
+        phone +
+        "?text=" +
+        message,
+        "_blank"
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
